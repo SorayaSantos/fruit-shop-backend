@@ -1,9 +1,11 @@
 package demo.md3.fruitshop.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -32,19 +34,25 @@ public class User extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
-	@ManyToMany
+	@NotNull
+	@Column(name = "active")
+	private Boolean active;
+
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles;
 
 	public User() {
 	}
 
 	public User(@NotNull String name, @NotNull String username, @NotNull String email, @NotNull String password,
-			List<Role> roles) {
+			@NotNull Boolean active, List<Role> roles) {
+		super();
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.active = active;
 		this.roles = roles;
 	}
 
@@ -81,6 +89,9 @@ public class User extends BaseEntity {
 	}
 
 	public List<Role> getRoles() {
+		if (roles == null) {
+			roles = new ArrayList<>();
+		}
 		return roles;
 	}
 
@@ -90,5 +101,13 @@ public class User extends BaseEntity {
 
 	public void addRole(Role role) {
 		this.roles.add(role);
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }
