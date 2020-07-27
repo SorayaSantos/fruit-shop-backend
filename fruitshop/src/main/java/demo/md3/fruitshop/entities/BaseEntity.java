@@ -2,10 +2,12 @@ package demo.md3.fruitshop.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class BaseEntity implements Serializable {
@@ -16,6 +18,8 @@ public class BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Column(name = "active")
 	private Boolean active;
 
 	public BaseEntity() {
@@ -23,6 +27,10 @@ public class BaseEntity implements Serializable {
 
 	public BaseEntity(Long id, Boolean active) {
 		this.id = id;
+		this.active = active;
+	}
+
+	public BaseEntity(@NotNull Boolean active) {
 		this.active = active;
 	}
 

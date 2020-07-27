@@ -1,4 +1,4 @@
-package demo.md3.fruitshop.payload;
+package demo.md3.fruitshop.payload.auth;
 
 public class JwtAuthenticationResponse {
 

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.md3.fruitshop.payload.ApiResponse;
-import demo.md3.fruitshop.payload.JwtAuthenticationResponse;
-import demo.md3.fruitshop.payload.LoginRequest;
-import demo.md3.fruitshop.payload.SignUpRequest;
+import demo.md3.fruitshop.payload.auth.ApiResponse;
+import demo.md3.fruitshop.payload.auth.JwtAuthenticationResponse;
+import demo.md3.fruitshop.payload.auth.LoginRequest;
+import demo.md3.fruitshop.payload.auth.SignUpRequest;
 import demo.md3.fruitshop.services.AuthService;
 
 @RestController

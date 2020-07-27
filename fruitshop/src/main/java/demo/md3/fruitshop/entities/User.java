@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
@@ -34,26 +36,28 @@ public class User extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
-	@NotNull
-	@Column(name = "active")
-	private Boolean active;
-
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Role> roles;
+
+	@JoinTable(name = "user_basket_product", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "basket_product_id"))
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<BasketProduct> basketProducts;
 
 	public User() {
 	}
 
 	public User(@NotNull String name, @NotNull String username, @NotNull String email, @NotNull String password,
-			@NotNull Boolean active, List<Role> roles) {
-		super();
+			List<Role> roles, List<BasketProduct> basketProducts) {
+		super(true);
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.active = active;
 		this.roles = roles;
+		this.basketProducts = basketProducts;
 	}
 
 	public String getName() {
@@ -103,11 +107,15 @@ public class User extends BaseEntity {
 		this.roles.add(role);
 	}
 
-	public Boolean getActive() {
-		return active;
+	public List<BasketProduct> getBasketProducts() {
+		if (basketProducts == null) {
+			basketProducts = new ArrayList<>();
+		}
+		return basketProducts;
 	}
 
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setBasketProducts(List<BasketProduct> basketProducts) {
+		this.basketProducts = basketProducts;
 	}
+
 }

@@ -14,13 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import demo.md3.fruitshop.entities.BasketProduct;
 import demo.md3.fruitshop.entities.Role;
 import demo.md3.fruitshop.entities.User;
 import demo.md3.fruitshop.exception.AppException;
-import demo.md3.fruitshop.payload.ApiResponse;
-import demo.md3.fruitshop.payload.JwtAuthenticationResponse;
-import demo.md3.fruitshop.payload.LoginRequest;
-import demo.md3.fruitshop.payload.SignUpRequest;
+import demo.md3.fruitshop.payload.auth.ApiResponse;
+import demo.md3.fruitshop.payload.auth.JwtAuthenticationResponse;
+import demo.md3.fruitshop.payload.auth.LoginRequest;
+import demo.md3.fruitshop.payload.auth.SignUpRequest;
 import demo.md3.fruitshop.repositories.RoleRepository;
 import demo.md3.fruitshop.repositories.UserRepository;
 import demo.md3.fruitshop.security.JwtTokenProvider;
@@ -73,7 +74,7 @@ public class AuthService {
 		}
 
 		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
-				signUpRequest.getPassword(), true, new ArrayList<Role>());
+				signUpRequest.getPassword(), new ArrayList<Role>(), new ArrayList<BasketProduct>());
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 

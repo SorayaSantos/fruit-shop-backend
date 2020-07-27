@@ -1,4 +1,4 @@
-package demo.md3.fruitshop.payload;
+package demo.md3.fruitshop.payload.auth;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
