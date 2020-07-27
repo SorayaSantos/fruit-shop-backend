@@ -22,6 +22,7 @@ public class UserController {
 	@PostMapping("/addproductobasket")
 	public AddProductToBasketResponse addProductToBasket(
 			@Valid @RequestBody AddProductToBasketRequest addProductToBasketRequest) {
-		return userService.addProductToBasket(addProductToBasketRequest.getBasketProduct());
+		return userService.addProductToBasket(addProductToBasketRequest.getProductId(),
+				addProductToBasketRequest.getQuantity());
 	}
 }

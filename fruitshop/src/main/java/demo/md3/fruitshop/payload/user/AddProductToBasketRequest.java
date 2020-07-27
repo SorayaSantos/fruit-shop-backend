@@ -2,19 +2,28 @@ package demo.md3.fruitshop.payload.user;
 
 import javax.validation.constraints.NotNull;
 
-import demo.md3.fruitshop.entities.BasketProduct;
-
 public class AddProductToBasketRequest {
 
 	@NotNull
-	private BasketProduct basketProduct;
+	private Long productId;
 
-	public BasketProduct getBasketProduct() {
-		return basketProduct;
+	@NotNull
+	private Long quantity;
+
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setBasketProduct(BasketProduct basketProduct) {
-		this.basketProduct = basketProduct;
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
 	}
 
 }
