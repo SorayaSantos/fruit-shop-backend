@@ -56,6 +56,12 @@ public class AuthService {
 
 	public ResponseEntity<ApiResponse> registerUser(SignUpRequest signUpRequest) {
 
+		if (signUpRequest.getName().isEmpty() || signUpRequest.getUsername().isEmpty()
+				|| signUpRequest.getEmail().isEmpty() || signUpRequest.getPassword().isEmpty()) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Empty credentials!"),
+					HttpStatus.BAD_REQUEST);
+		}
+
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Username is already taken!"),
 					HttpStatus.BAD_REQUEST);

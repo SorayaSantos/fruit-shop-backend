@@ -6,9 +6,11 @@ import javax.validation.constraints.Size;
 
 public class SignUpRequest {
 
+	@NotNull
 	@Size(min = 2, max = 100)
 	private String name;
 
+	@NotNull
 	@Size(min = 2, max = 100)
 	private String username;
 
