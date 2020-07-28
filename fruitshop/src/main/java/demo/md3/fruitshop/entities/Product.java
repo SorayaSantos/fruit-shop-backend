@@ -17,11 +17,9 @@ public class Product extends BaseEntity {
 	@Column(name = "name")
 	private String name;
 
-	@NotNull
-	@Column(name = "imageLink")
-	private String imageLink;
+	@Column(name = "image")
+	private String image;
 
-	@NotNull
 	@Column(name = "description")
 	private String description;
 
@@ -36,9 +34,11 @@ public class Product extends BaseEntity {
 	public Product() {
 	}
 
-	public Product(String name, String imageLink, String description, BigDecimal price, Long quantity) {
+	public Product(@NotNull String name, String image, String description, @NotNull BigDecimal price,
+			@NotNull Long quantity) {
+		super();
 		this.name = name;
-		this.imageLink = imageLink;
+		this.image = image;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
@@ -48,8 +48,12 @@ public class Product extends BaseEntity {
 		return name;
 	}
 
-	public String getImageLink() {
-		return imageLink;
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getDescription() {
@@ -66,10 +70,6 @@ public class Product extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setImageLink(String imageLink) {
-		this.imageLink = imageLink;
 	}
 
 	public void setDescription(String description) {

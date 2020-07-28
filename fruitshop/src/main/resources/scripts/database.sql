@@ -24,10 +24,10 @@ create table fruitshop.user_role (
 create table fruitshop.product(
 "id" bigserial primary key  ,
 "name" text not null,
-"image_link" text,
+"image" text,
 "description" text,
-"price" numeric,
-"quantity" bigint,
+"price" numeric not null,
+"quantity" bigint not null,
 "active" bool not null
 );
 
@@ -65,11 +65,11 @@ ADD constraint  basket_product_id_constraint FOREIGN KEY ("basket_product_id") R
 insert into fruitshop."role" (id,"name",active) values(1,'ROLE_USER',true);
 insert into fruitshop."role" (id,"name",active) values(2,'ROLE_ADMIN',true);
 
-insert into fruitshop.product(id,"name",image_link,description,price,quantity,active) 
+/*insert into fruitshop.product(id,"name",image_link,description,price,quantity,active) 
 values(1,'Apple', '../images/GrannySmith.jpg', 'Granny Smith', 2.50,90,true);
 insert into fruitshop.product(id,"name",image_link,description,price,quantity,active) 
 values(2,'Lemon', '../images/Lemon.jpg', 'From Portugal', 1.50,40,true);
 insert into fruitshop.product(id,"name",image_link,description,price,quantity,active) 
 values(3,'Pineapple', '../images/Pineapple.jpg', 'From Açores', 2.00,80,true);
 insert into fruitshop.product(id,"name",image_link,description,price,quantity,active) 
-values(4,'Orange', '../images/Orange.jpg', 'From Algarve', 2.50,60,true);
+values(4,'Orange', '../images/Orange.jpg', 'From Algarve', 2.50,60,true);*/
