@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import demo.md3.fruitshop.entities.Product;
 import demo.md3.fruitshop.payload.auth.ApiResponse;
-import demo.md3.fruitshop.payload.product.NewProductRequest;
-import demo.md3.fruitshop.payload.product.NewProductResponse;
+import demo.md3.fruitshop.payload.product.SaveProductRequest;
+import demo.md3.fruitshop.payload.product.SaveProductResponse;
 import demo.md3.fruitshop.repositories.ProductRepository;
 
 @Service
@@ -23,13 +23,13 @@ public class ProductService {
 		return new ResponseEntity<List<Product>>(productRepository.findAll(), HttpStatus.ACCEPTED);
 	}
 
-	public NewProductResponse newProduct(NewProductRequest newProductRequest) {
+	public SaveProductResponse saveProduct(SaveProductRequest newProductRequest) {
 
 		Product product = newProductRequest.getProduct();
 		product.setActive(true);
 
 		productRepository.saveAndFlush(product);
 
-		return new NewProductResponse(new ApiResponse(true, "Product created"), product);
+		return new SaveProductResponse(new ApiResponse(true, "Product created"), product);
 	}
 }

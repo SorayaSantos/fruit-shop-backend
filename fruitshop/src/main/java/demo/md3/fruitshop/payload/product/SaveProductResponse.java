@@ -3,16 +3,16 @@ package demo.md3.fruitshop.payload.product;
 import demo.md3.fruitshop.entities.Product;
 import demo.md3.fruitshop.payload.auth.ApiResponse;
 
-public class NewProductResponse {
+public class SaveProductResponse {
 
 	private ApiResponse apiResponse;
 
 	private Product product;
 
-	public NewProductResponse() {
+	public SaveProductResponse() {
 	}
 
-	public NewProductResponse(ApiResponse apiResponse, Product product) {
+	public SaveProductResponse(ApiResponse apiResponse, Product product) {
 		this.apiResponse = apiResponse;
 		this.product = product;
 	}

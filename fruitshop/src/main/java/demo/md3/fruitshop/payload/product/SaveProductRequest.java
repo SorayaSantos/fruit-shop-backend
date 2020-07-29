@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import demo.md3.fruitshop.entities.Product;
 
-public class NewProductRequest {
+public class SaveProductRequest {
 
 	@NotNull
 	private Product product;

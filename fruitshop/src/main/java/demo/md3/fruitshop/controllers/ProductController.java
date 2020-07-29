@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.md3.fruitshop.entities.Product;
-import demo.md3.fruitshop.payload.product.NewProductRequest;
-import demo.md3.fruitshop.payload.product.NewProductResponse;
+import demo.md3.fruitshop.payload.product.SaveProductRequest;
+import demo.md3.fruitshop.payload.product.SaveProductResponse;
 import demo.md3.fruitshop.services.ProductService;
 
 @RestController
@@ -29,8 +29,8 @@ public class ProductController {
 		return productService.getAllProducts();
 	}
 
-	@PostMapping("/newproduct")
-	public NewProductResponse newProduct(@Valid @RequestBody NewProductRequest newProductRequest) {
-		return productService.newProduct(newProductRequest);
+	@PostMapping("/saveproduct")
+	public SaveProductResponse saveProduct(@Valid @RequestBody SaveProductRequest saveProductRequest) {
+		return productService.saveProduct(saveProductRequest);
 	}
 }
