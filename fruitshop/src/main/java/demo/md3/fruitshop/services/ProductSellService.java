@@ -11,6 +11,7 @@ import demo.md3.fruitshop.entities.BasketProduct;
 import demo.md3.fruitshop.entities.Product;
 import demo.md3.fruitshop.entities.ProductSell;
 import demo.md3.fruitshop.entities.Sell;
+import demo.md3.fruitshop.entities.User;
 import demo.md3.fruitshop.exception.AppException;
 import demo.md3.fruitshop.payload.auth.ApiResponse;
 import demo.md3.fruitshop.payload.productsell.SaveProductSellRequest;
@@ -18,6 +19,7 @@ import demo.md3.fruitshop.payload.productsell.SaveProductSellResponse;
 import demo.md3.fruitshop.repositories.ProductRepository;
 import demo.md3.fruitshop.repositories.ProductSellRepository;
 import demo.md3.fruitshop.repositories.SellRepository;
+import demo.md3.fruitshop.repositories.UserRepository;
 
 @Service
 public class ProductSellService {
@@ -30,6 +32,12 @@ public class ProductSellService {
 
 	@Autowired
 	private ProductSellRepository productSellRepository;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	public SaveProductSellResponse saveProductSell(SaveProductSellRequest saveProductSellRequest) {
 
@@ -57,9 +65,13 @@ public class ProductSellService {
 
 		for (BasketProduct basketProduct : basketProducts) {
 			ProductSell productSell = new ProductSell(basketProduct.getProduct(), basketProduct.getQuantity(), sell);
-			sell.setActive(true);
+			productSell.setActive(true);
 			productSellList.add(productSellRepository.saveAndFlush(productSell));
 		}
+
+		User user = userService.getCurrentUser();
+		user.getBasketProducts().clear();
+		userRepository.save(user);
 
 		return new SaveProductSellResponse(new ApiResponse(true, "Sell created"), productSellList);
 	}

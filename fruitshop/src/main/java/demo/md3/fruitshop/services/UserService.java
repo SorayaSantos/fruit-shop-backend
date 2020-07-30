@@ -39,10 +39,7 @@ public class UserService {
 			return new AddProductToBasketResponse(new ApiResponse(false, "Not enough product!"), null);
 		}
 
-		UserDetails userDetails = getCurrentUser();
-
-		User user = userRepository.findByUsername(userDetails.getUsername())
-				.orElseThrow(() -> new AppException("User not found"));
+		User user = getCurrentUser();
 
 		BasketProduct basketProduct = new BasketProduct(product, quantity);
 		basketProduct.setActive(true);
@@ -60,15 +57,11 @@ public class UserService {
 
 	public GetBasketProductsResponse getBasketProducts() {
 
-		UserDetails userDetails = getCurrentUser();
-
-		User user = userRepository.findByUsername(userDetails.getUsername())
-				.orElseThrow(() -> new AppException("User not found"));
-
+		User user = getCurrentUser();
 		return new GetBasketProductsResponse(new ApiResponse(true, "Success"), user.getBasketProducts());
 	}
 
-	private UserDetails getCurrentUser() {
+	public User getCurrentUser() {
 
 		Object userPrincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = null;
@@ -78,7 +71,10 @@ public class UserService {
 		}
 
 		if (userDetails != null) {
-			return userDetails;
+			User user = userRepository.findByUsername(userDetails.getUsername())
+					.orElseThrow(() -> new AppException("User not found"));
+
+			return user;
 		} else {
 			throw new AppException("Current user not found");
 		}
