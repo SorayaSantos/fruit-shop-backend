@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import demo.md3.fruitshop.entities.Product;
+import demo.md3.fruitshop.payload.product.DeleteProductRequest;
+import demo.md3.fruitshop.payload.product.DeleteProductResponse;
 import demo.md3.fruitshop.payload.product.SaveProductRequest;
 import demo.md3.fruitshop.payload.product.SaveProductResponse;
 import demo.md3.fruitshop.services.ProductService;
@@ -32,5 +34,10 @@ public class ProductController {
 	@PostMapping("/saveproduct")
 	public SaveProductResponse saveProduct(@Valid @RequestBody SaveProductRequest saveProductRequest) {
 		return productService.saveProduct(saveProductRequest);
+	}
+
+	@PostMapping("/deleteproduct")
+	public DeleteProductResponse deleteProduct(@Valid @RequestBody DeleteProductRequest deleteProductRequest) {
+		return productService.deleteProduct(deleteProductRequest);
 	}
 }
