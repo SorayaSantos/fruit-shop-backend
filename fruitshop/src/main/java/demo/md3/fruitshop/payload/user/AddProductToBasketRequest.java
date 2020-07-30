@@ -1,5 +1,7 @@
 package demo.md3.fruitshop.payload.user;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotNull;
 
 public class AddProductToBasketRequest {
@@ -8,13 +10,13 @@ public class AddProductToBasketRequest {
 	private Long productId;
 
 	@NotNull
-	private Long quantity;
+	private BigDecimal quantity;
 
 	public Long getProductId() {
 		return productId;
 	}
 
-	public Long getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
@@ -22,7 +24,7 @@ public class AddProductToBasketRequest {
 		this.productId = productId;
 	}
 
-	public void setQuantity(Long quantity) {
+	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
 	}
 

@@ -27,20 +27,34 @@ create table fruitshop.product(
 "image" text,
 "description" text,
 "price" numeric not null,
-"quantity" bigint not null,
+"quantity" numeric not null,
 "active" bool not null
 );
 
 create table fruitshop.basket_product(
 "id" bigserial primary key  ,
 "product_id" bigint not null,
-"quantity" bigint not null,
+"quantity" numeric not null,
 "active" bool not null
 );
 
 create table fruitshop.user_basket_product (
 "user_id" bigint not null,
 "basket_product_id" bigint not null
+);
+
+create table fruitshop.sell(
+"id" bigserial primary key,
+"total" numeric not null,
+"active" bool not null
+);
+
+create table fruitshop.product_sell(
+"id" bigserial primary key,
+"product_id" bigint not null,
+"sell_id" bigint not null,
+"quantity" numeric not null,
+"active" bool not null
 );
 
 

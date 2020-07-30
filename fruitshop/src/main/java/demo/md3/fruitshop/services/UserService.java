@@ -1,5 +1,7 @@
 package demo.md3.fruitshop.services;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,12 +30,12 @@ public class UserService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	public AddProductToBasketResponse addProductToBasket(Long productId, Long quantity) {
+	public AddProductToBasketResponse addProductToBasket(Long productId, BigDecimal quantity) {
 
 		Product product = productRepository.findById(productId)
 				.orElseThrow(() -> new AppException("Product not found"));
 
-		if (product.getQuantity() < quantity) {
+		if (product.getQuantity().compareTo(quantity) < 0) {
 			return new AddProductToBasketResponse(new ApiResponse(false, "Not enough product!"), null);
 		}
 

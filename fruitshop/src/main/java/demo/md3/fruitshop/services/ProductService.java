@@ -29,9 +29,9 @@ public class ProductService {
 		return new ResponseEntity<List<Product>>(products, HttpStatus.ACCEPTED);
 	}
 
-	public SaveProductResponse saveProduct(SaveProductRequest newProductRequest) {
+	public SaveProductResponse saveProduct(SaveProductRequest saveProductRequest) {
 
-		Product product = newProductRequest.getProduct();
+		Product product = saveProductRequest.getProduct();
 		product.setActive(true);
 
 		productRepository.saveAndFlush(product);

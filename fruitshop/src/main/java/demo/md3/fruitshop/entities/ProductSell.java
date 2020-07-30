@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "basket_product")
-public class BasketProduct extends BaseEntity {
+@Table(name = "product_sell")
+public class ProductSell extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,12 +24,18 @@ public class BasketProduct extends BaseEntity {
 	@Column(name = "quantity")
 	private BigDecimal quantity;
 
-	public BasketProduct() {
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "sell_id")
+	private Sell sell;
+
+	public ProductSell() {
 	}
 
-	public BasketProduct(@NotNull Product product, @NotNull BigDecimal quantity) {
+	public ProductSell(@NotNull Product product, @NotNull BigDecimal quantity, @NotNull Sell sell) {
 		this.product = product;
 		this.quantity = quantity;
+		this.sell = sell;
 	}
 
 	public Product getProduct() {
@@ -40,12 +46,20 @@ public class BasketProduct extends BaseEntity {
 		return quantity;
 	}
 
+	public Sell getSell() {
+		return sell;
+	}
+
 	public void setProduct(Product product) {
 		this.product = product;
 	}
 
 	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
+	}
+
+	public void setSell(Sell sell) {
+		this.sell = sell;
 	}
 
 }

@@ -29,13 +29,13 @@ public class Product extends BaseEntity {
 
 	@NotNull
 	@Column(name = "quantity")
-	private Long quantity;
+	private BigDecimal quantity;
 
 	public Product() {
 	}
 
 	public Product(@NotNull String name, String image, String description, @NotNull BigDecimal price,
-			@NotNull Long quantity) {
+			@NotNull BigDecimal quantity) {
 		super();
 		this.name = name;
 		this.image = image;
@@ -64,7 +64,7 @@ public class Product extends BaseEntity {
 		return price;
 	}
 
-	public Long getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
@@ -80,7 +80,7 @@ public class Product extends BaseEntity {
 		this.price = price;
 	}
 
-	public void setQuantity(Long quantity) {
+	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
 	}
 
